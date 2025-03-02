@@ -1,0 +1,100 @@
+name: Authentication
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/register
+    metadata:
+      groupName: Authentication
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Register a new user'
+      description: 'This endpoint allows users to create an account by providing their name, email, and password.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The full name of the user. Max: 255 characters.'
+        required: true
+        example: '"John Doe"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'A valid and unique email address. Max: 255 characters.'
+        required: true
+        example: '"john@example.com"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'A password with at least 8 characters. Must be confirmed.'
+        required: true
+        example: '"password123"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'Must match the password.'
+        required: true
+        example: '"password123"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: '"John Doe"'
+      email: '"john@example.com"'
+      password: '"password123"'
+      password_confirmation: '"password123"'
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john@example.com"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "message": "The email has already been taken.",
+            "errors": {
+              "email": ["The email has already been taken."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

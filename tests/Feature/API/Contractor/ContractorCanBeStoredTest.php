@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\API\Contractor;
+namespace Tests\Feature\API\Contractor;
 
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;

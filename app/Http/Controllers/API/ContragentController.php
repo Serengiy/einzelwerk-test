@@ -21,6 +21,47 @@ class ContragentController extends APIController
     )
     {}
 
+    /**
+     * Get a list of contractors
+     *
+     * This endpoint retrieves a paginated list of contractors along with their associated users.
+     *
+     * @group Contractors
+     *
+     * @queryParam per_page integer The number of results per page. Defaults to 15. Example: 20
+     *
+     * @response 200 {
+     *   "data": [
+     *     {
+     *       "id": 1,
+     *       "inn": "7707083893",
+     *       "address": "123 Main St, Moscow",
+     *       "name": "ООО Контрагент",
+     *       "user": {
+     *         "id": 1,
+     *         "name": "John Doe",
+     *         "email": "john@example.com",
+     *         "email_verified_at": "2024-03-01 12:00:00"
+     *       }
+     *     }
+     *   ],
+     *   "links": {
+     *     "first": "http://your-app.test/api/contractors?page=1",
+     *     "last": "http://your-app.test/api/contractors?page=3",
+     *     "prev": null,
+     *     "next": "http://your-app.test/api/contractors?page=2"
+     *   },
+     *   "meta": {
+     *     "current_page": 1,
+     *     "from": 1,
+     *     "last_page": 3,
+     *     "path": "http://your-app.test/api/contractors",
+     *     "per_page": 15,
+     *     "to": 15,
+     *     "total": 45
+     *   }
+     * }
+     */
     public function index(Request $request): AnonymousResourceCollection
     {
         $paginate = $request->get('per_page', 15);
@@ -29,6 +70,37 @@ class ContragentController extends APIController
         return ContragentResource::collection($query->paginate($paginate));
     }
 
+    /**
+     * Create a new contractor
+     *
+     * This endpoint allows creating a new contractor by providing an INN, address, name, and a user ID.
+     *
+     * @group Contractors
+     *
+     * @bodyParam inn string required The INN (Taxpayer Identification Number) of the contractor. Example: "7707083893"
+     * @bodyParam address string optional The address of the contractor. Example: "123 Main St, Moscow"
+     * @bodyParam name string required The name of the contractor. Example: "ООО Контрагент"
+     * @bodyParam user_id integer required The ID of the associated user. Must exist in the users table. Example: 1
+     *
+     * @response 201 {
+     *   "id": 1,
+     *   "inn": "7707083893",
+     *   "address": "123 Main St, Moscow",
+     *   "name": "ООО Контрагент",
+     *   "user": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "email": "john@example.com",
+     *     "email_verified_at": "2024-03-01 12:00:00"
+     *   }
+     * }
+     * @response 404 {
+     *   "message": "User not found"
+     * }
+     * @response 503 {
+     *   "message": "Service is temporarily unavailable, try again later"
+     * }
+     */
     public function store(ContragentStoreRequest $request): JsonResponse|ContragentResource
     {
         try {
