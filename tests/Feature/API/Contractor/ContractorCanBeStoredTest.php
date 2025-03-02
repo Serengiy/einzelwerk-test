@@ -14,11 +14,11 @@ ContractorCanBeStoredTest extends TestCase
         $user = $this->createUser();
         $data = [
             'inn' => '370702075306',
-            'user_id' => User::query()->whereDoesntHave('contragent')->first()->id,
         ];
 
         $response = $this->actingAs($user)->postJson('/api/contragents', $data);
 
+        dd($response->json());
         $response->assertStatus(Response::HTTP_CREATED);
     }
 }

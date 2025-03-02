@@ -21,14 +21,14 @@ readonly class ContractorService
      */
     public function store(ContragentStoreDTO $data): Contagent
     {
-        $user = $data->user;
         $fetchedData = $this->getContractorInformationByInn($data->inn);
-        return $user->contragent()->create([
-            'inn' => $fetchedData->inn,
-            'name' => $fetchedData->name,
-            'ogrn' => $fetchedData->ogrn,
-            'address' => $fetchedData->address,
-        ]);
+        $contragent = new Contagent();
+        $contragent->inn = $fetchedData->inn;
+        $contragent->name = $fetchedData->name;
+        $contragent->ogrn = $fetchedData->ogrn;
+        $contragent->address = $fetchedData->address;
+        $contragent->save();
+        return $contragent;
     }
 
     /**

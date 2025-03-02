@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('contagents', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class)->index('idx_contagents_user_id');
+            $table->foreignIdFor(\App\Models\User::class)->nullable()->index('idx_contagents_user_id');
             $table->string('inn', 12)->index('idx_contagents_inn');
             $table->string('name')->index('idx_contagents_name');
             $table->string('ogrn')->index('idx_contagents_ogrn');
