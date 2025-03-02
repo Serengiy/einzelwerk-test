@@ -14,5 +14,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('contragents')->group(function () {
         Route::get('/', [ContragentController::class, 'index']);
         Route::post('/', [ContragentController::class, 'store']);
+
+        Route::post('{contagent}/attach/{user}', [ContragentController::class, 'attach']);
     });
 });

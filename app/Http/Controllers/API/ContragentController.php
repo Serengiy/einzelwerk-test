@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\ContragentStoreRequest;
 use App\Http\Resources\ContragentResource;
 use App\Models\Contagent;
+use App\Models\User;
 use App\Services\Contractor\ContractorService;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\JsonResponse;
@@ -113,5 +114,37 @@ class ContragentController extends APIController
         }catch (NotFoundHttpException $e) {
             return $this->respondNotFound($e->getMessage());
         }
+    }
+
+    /**
+     * Attach a user to a contractor
+     *
+     * This endpoint allows associating a user with a contractor.
+     *
+     * @group Contractors
+     *
+     * @urlParam contagent required The ID of the contractor to attach the user to. Example: 1
+     * @urlParam user required The ID of the user to associate with the contractor. Example: 2
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "inn": "7707083893",
+     *   "address": "123 Main St, Moscow",
+     *   "name": "ООО Контрагент",
+     *   "user": {
+     *     "id": 2,
+     *     "name": "John Doe",
+     *     "email": "john@example.com",
+     *     "email_verified_at": "2024-03-01 12:00:00"
+     *   }
+     * }
+     * @response 404 {
+     *   "message": "Contractor or user not found"
+     * }
+     */
+    public function attach(Contagent $contagent, User $user): ContragentResource
+    {
+        $contagent->user()->associate($user);
+        return ContragentResource::make($contagent->load('user'));
     }
 }

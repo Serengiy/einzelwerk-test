@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\Contagent;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -23,5 +24,16 @@ abstract class TestCase extends BaseTestCase
         $user->password = Hash::make('password');
         $user->save();
         return $user;
+    }
+
+    public function createContractor(): Contagent
+    {
+        $contragent = new Contagent();
+        $contragent->name = fake()->name;
+        $contragent->address = fake()->address;
+        $contragent->inn = '';
+        $contragent->ogrn = (string) fake()->numberBetween(1000000000, 999999999);
+        $contragent->save();
+        return $contragent;
     }
 }
