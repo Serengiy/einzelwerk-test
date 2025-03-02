@@ -18,7 +18,6 @@ ContractorCanBeStoredTest extends TestCase
 
         $response = $this->actingAs($user)->postJson('/api/contragents', $data);
 
-        dd($response->json());
         $response->assertStatus(Response::HTTP_CREATED);
     }
 }
