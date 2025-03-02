@@ -87,6 +87,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="contractors-POSTapi-contragents">
                                 <a href="#contractors-POSTapi-contragents">Create a new contractor</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="contractors-POSTapi-contragents--contagent_id--attach--user_id-">
+                                <a href="#contractors-POSTapi-contragents--contagent_id--attach--user_id-">Attach a user to a contractor</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-uer" class="tocify-header">
@@ -509,9 +512,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"inn\": \"\\\"7707083893\\\"\",
-    \"user_id\": 1,
     \"address\": \"\\\"123 Main St, Moscow\\\"\",
-    \"name\": \"\\\"ООО Контрагент\\\"\"
+    \"name\": \"\\\"ООО Контрагент\\\"\",
+    \"user_id\": 1
 }"
 </code></pre></div>
 
@@ -528,9 +531,9 @@ const headers = {
 
 let body = {
     "inn": "\"7707083893\"",
-    "user_id": 1,
     "address": "\"123 Main St, Moscow\"",
-    "name": "\"ООО Контрагент\""
+    "name": "\"ООО Контрагент\"",
+    "user_id": 1
 };
 
 fetch(url, {
@@ -661,17 +664,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>The INN (Taxpayer Identification Number) of the contractor. Example: <code>"7707083893"</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>user_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="user_id"                data-endpoint="POSTapi-contragents"
-               value="1"
-               data-component="body">
-    <br>
-<p>The ID of the associated user. Must exist in the users table. Example: <code>1</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
@@ -693,7 +685,198 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The name of the contractor. Example: <code>"ООО Контрагент"</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>user_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="user_id"                data-endpoint="POSTapi-contragents"
+               value="1"
+               data-component="body">
+    <br>
+<p>The ID of the associated user. Must exist in the users table. Example: <code>1</code></p>
+        </div>
         </form>
+
+                    <h2 id="contractors-POSTapi-contragents--contagent_id--attach--user_id-">Attach a user to a contractor</h2>
+
+<p>
+</p>
+
+<p>This endpoint allows associating a user with a contractor.</p>
+
+<span id="example-requests-POSTapi-contragents--contagent_id--attach--user_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/contragents/16/attach/16" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/contragents/16/attach/16"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-contragents--contagent_id--attach--user_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;inn&quot;: &quot;7707083893&quot;,
+    &quot;address&quot;: &quot;123 Main St, Moscow&quot;,
+    &quot;name&quot;: &quot;ООО Контрагент&quot;,
+    &quot;user&quot;: {
+        &quot;id&quot;: 2,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;email&quot;: &quot;john@example.com&quot;,
+        &quot;email_verified_at&quot;: &quot;2024-03-01 12:00:00&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Contractor or user not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-contragents--contagent_id--attach--user_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-contragents--contagent_id--attach--user_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-contragents--contagent_id--attach--user_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-contragents--contagent_id--attach--user_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-contragents--contagent_id--attach--user_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-contragents--contagent_id--attach--user_id-" data-method="POST"
+      data-path="api/contragents/{contagent_id}/attach/{user_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-contragents--contagent_id--attach--user_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-contragents--contagent_id--attach--user_id-"
+                    onclick="tryItOut('POSTapi-contragents--contagent_id--attach--user_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-contragents--contagent_id--attach--user_id-"
+                    onclick="cancelTryOut('POSTapi-contragents--contagent_id--attach--user_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-contragents--contagent_id--attach--user_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/contragents/{contagent_id}/attach/{user_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-contragents--contagent_id--attach--user_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-contragents--contagent_id--attach--user_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>contagent_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="contagent_id"                data-endpoint="POSTapi-contragents--contagent_id--attach--user_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the contagent. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>user_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="user_id"                data-endpoint="POSTapi-contragents--contagent_id--attach--user_id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the user. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>contagent</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="contagent"                data-endpoint="POSTapi-contragents--contagent_id--attach--user_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the contractor to attach the user to. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>user</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="user"                data-endpoint="POSTapi-contragents--contagent_id--attach--user_id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the user to associate with the contractor. Example: <code>2</code></p>
+            </div>
+                    </form>
 
                 <h1 id="uer">Uer</h1>
 

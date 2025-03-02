@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\API\User;
+namespace Tests\Feature\API\User;
 
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;

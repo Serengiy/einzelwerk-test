@@ -112,16 +112,6 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
-      user_id:
-        name: user_id
-        description: 'The ID of the associated user. Must exist in the users table.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
       address:
         name: address
         description: 'optional The address of the contractor.'
@@ -142,11 +132,21 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
+      user_id:
+        name: user_id
+        description: 'The ID of the associated user. Must exist in the users table.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanBodyParameters:
       inn: '"7707083893"'
-      user_id: 1
       address: '"123 Main St, Moscow"'
       name: '"ООО Контрагент"'
+      user_id: 1
     fileParameters: []
     responses:
       -
@@ -181,6 +181,107 @@ endpoints:
         content: |-
           {
             "message": "Service is temporarily unavailable, try again later"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/contragents/{contagent_id}/attach/{user_id}'
+    metadata:
+      groupName: Contractors
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Attach a user to a contractor'
+      description: 'This endpoint allows associating a user with a contractor.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      contagent_id:
+        name: contagent_id
+        description: 'The ID of the contagent.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      user_id:
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      contagent:
+        name: contagent
+        description: 'The ID of the contractor to attach the user to.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      user:
+        name: user
+        description: 'The ID of the user to associate with the contractor.'
+        required: true
+        example: '2'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      contagent_id: 16
+      user_id: 16
+      contagent: '1'
+      user: '2'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "inn": "7707083893",
+            "address": "123 Main St, Moscow",
+            "name": "ООО Контрагент",
+            "user": {
+              "id": 2,
+              "name": "John Doe",
+              "email": "john@example.com",
+              "email_verified_at": "2024-03-01 12:00:00"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "message": "Contractor or user not found"
           }
         headers: []
         description: ''
