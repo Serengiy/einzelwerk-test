@@ -36,7 +36,9 @@ npm:
 # Run to install the application
 install:
 	composer install
+	npm install
 	php artisan key:generate
 	php artisan sail:install
 	$(SAIL) up -d
 	$(SAIL) artisan app:install
+	$(SAIL) npm run dev
