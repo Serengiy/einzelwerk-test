@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\API\Activity\ActivityMetaResource;
 use App\Models\Contagent;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -22,6 +21,7 @@ class ContragentResource extends JsonResource
         return [
             'id' => $this->id,
             'inn' => $this->inn,
+            'ogrn' => $this->ogrn,
             'address' => $this->address,
             'name' => $this->name,
             'user'=> $this->whenLoaded(
