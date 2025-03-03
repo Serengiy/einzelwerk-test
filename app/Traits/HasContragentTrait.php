@@ -30,6 +30,13 @@ trait HasContragentTrait
             $query->where('address','like', "%$address%");
         }
 
+        if($queryString = $data['query'] ?? null){
+            $query->orWhere(function ($query) use ($queryString) {
+                $query->where('inn', 'like', "%$queryString%")
+                    ->orWhere('name', 'like', "%$queryString%");
+            });
+        }
+
 
         return $query;
     }

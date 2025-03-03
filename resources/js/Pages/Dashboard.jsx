@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {Head, useForm} from "@inertiajs/react";
 
@@ -8,9 +8,9 @@ export default function Dashboard({ contragents }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         inn: "",
     });
+    const [queryString, setQueryString] = useState("");
     const [error, setError] = useState('');
 
-    console.log(contragents)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,6 +23,9 @@ export default function Dashboard({ contragents }) {
                 setError(errors.message);
             }
         });
+    };
+    const handleSearchChange = (e) => {
+        setQueryString(e.target.value);
     };
 
     return (
@@ -46,6 +49,15 @@ export default function Dashboard({ contragents }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg p-6 text-gray-900">
+                        {/*<div className="flex space-x-4 mb-4">*/}
+                        {/*    <input*/}
+                        {/*        type="text"*/}
+                        {/*        placeholder="Поиск по ИНН / наименованию"*/}
+                        {/*        value={queryString}*/}
+                        {/*        onChange={handleSearchChange}*/}
+                        {/*        className="p-2 border rounded w-full"*/}
+                        {/*    />*/}
+                        {/*</div>*/}
                         {contragents?.data.length > 0 ? (
                             <>
                                 <table className="w-full border-collapse border border-gray-300">
@@ -79,7 +91,7 @@ export default function Dashboard({ contragents }) {
                                                     ? "bg-orange-600 text-white"
                                                     : "bg-gray-200 text-gray-700"
                                             }`}
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                            dangerouslySetInnerHTML={{__html: link.label}}
                                         />
                                     ))}
                                 </div>
