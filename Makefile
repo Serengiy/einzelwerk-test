@@ -35,8 +35,8 @@ npm:
 
 # Run to install the application
 install:
-	cp .env.example .env
 	composer install
 	php artisan key:generate
 	php artisan sail:install
+	$(SAIL) up -d
 	$(SAIL) artisan app:install

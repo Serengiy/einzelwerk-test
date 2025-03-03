@@ -98,3 +98,85 @@ endpoints:
     method: null
     route: null
     custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/login
+    metadata:
+      groupName: Authentication
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'User login'
+      description: 'This endpoint allows users to log in using their email and password.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'A registered email address. Max: 255 characters.'
+        required: true
+        example: '"john@example.com"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: "The user's password."
+        required: true
+        example: '"password123"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: '"john@example.com"'
+      password: '"password123"'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "token": "2|abc123456789xyz"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+            "message": "Invalid credentials"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "message": "The email field is required.",
+            "errors": {
+              "email": ["The email field is required."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
