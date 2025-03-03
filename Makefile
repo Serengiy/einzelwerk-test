@@ -41,4 +41,4 @@ install:
 	php artisan sail:install
 	$(SAIL) up -d
 	$(SAIL) artisan app:install
-	$(SAIL) npm run dev
+	npm run dev
